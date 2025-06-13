@@ -2,14 +2,14 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
-import { DesignCanvas } from "../components/DesignCanvas";
+import { EnhancedDesignCanvas } from "../components/EnhancedDesignCanvas";
 import { PropertiesPanel } from "../components/PropertiesPanel";
 import { ToolsPanel } from "../components/ToolsPanel";
 
 const Index = () => {
   const [activeTool, setActiveTool] = useState("select");
   const [selectedObject, setSelectedObject] = useState(null);
-  const [canvasSize, setCanvasSize] = useState({ width: 400, height: 300 });
+  const [canvasSize, setCanvasSize] = useState({ width: 1200, height: 800 });
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -29,11 +29,10 @@ const Index = () => {
             onCanvasSizeChange={setCanvasSize}
           />
           
-          {/* Canvas Container */}
-          <div className="flex-1 flex justify-center items-center bg-muted/30 p-8">
-            <DesignCanvas 
+          {/* Enhanced Canvas with Rulers and Grid */}
+          <div className="flex-1 flex">
+            <EnhancedDesignCanvas 
               activeTool={activeTool}
-              canvasSize={canvasSize}
               onObjectSelect={setSelectedObject}
             />
           </div>
