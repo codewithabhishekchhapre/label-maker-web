@@ -25,35 +25,12 @@ export const EnhancedDesignCanvas = ({ activeTool, onObjectSelect }) => {
       backgroundColor: "#ffffff",
     });
 
-    // Add grid pattern
-    const createGridPattern = () => {
-      const gridSize = 20;
-      const patternCanvas = document.createElement('canvas');
-      const patternCtx = patternCanvas.getContext('2d');
-      
-      patternCanvas.width = gridSize;
-      patternCanvas.height = gridSize;
-      
-      patternCtx.strokeStyle = '#f0f0f0';
-      patternCtx.lineWidth = 0.5;
-      patternCtx.beginPath();
-      patternCtx.moveTo(0, 0);
-      patternCtx.lineTo(gridSize, 0);
-      patternCtx.moveTo(0, 0);
-      patternCtx.lineTo(0, gridSize);
-      patternCtx.stroke();
-      
-      return patternCanvas;
-    };
-
-    const gridPattern = createGridPattern();
-    canvas.setBackgroundColor(
-      {
-        source: gridPattern,
-        repeat: 'repeat'
-      },
-      canvas.renderAll.bind(canvas)
-    );
+    // Add grid pattern using CSS background instead of fabric pattern
+    canvasRef.current.style.backgroundImage = `
+      linear-gradient(rgba(240, 240, 240, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240, 240, 240, 0.5) 1px, transparent 1px)
+    `;
+    canvasRef.current.style.backgroundSize = "20px 20px";
 
     // Canvas event listeners
     canvas.on("selection:created", (e) => {
